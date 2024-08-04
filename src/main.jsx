@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import installationPrompt from './utils/installationPrompt.js'
+import installationPrompt from './utils/installationPrompt.jsx'
 
 installationPrompt()
 
