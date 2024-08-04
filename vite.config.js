@@ -5,7 +5,7 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 
 export default defineConfig({
   server: {
-    https: true,
+    // https: true,
     port: 3001, 
   },
   plugins: [
