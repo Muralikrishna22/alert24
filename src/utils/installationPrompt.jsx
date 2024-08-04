@@ -1,4 +1,4 @@
-export default installationPrompt = () => {
+const installationPrompt = () => {
     let deferredPrompt;
 
     // Listen for the `beforeinstallprompt` event
@@ -63,3 +63,5 @@ export default installationPrompt = () => {
     });
 
 }
+
+export default installationPrompt
