@@ -59,26 +59,6 @@ button:focus-visible {
   display: none;
 }
 
-.install-popup {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  z-index: 1000;
-}
-
-.install-popup p {
-  margin: 0;
-}
-
-.install-popup button {
-  margin-right: 10px;
-}
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

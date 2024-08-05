@@ -1,12 +1,13 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import InstallationPrompt from "../InstallationPrompt";
 
-const Base = ({children}) => {
+const Base = ({ children }) => {
     return (
         <div className="base_container">
             <Header />
-           {children}
+            {children}
             <Footer />
         </div>
     )
