@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import LoginPage from './Modules/LoginPage/LoginPage'
+import LoginForm from './Modules/LoginPage'
+import RegistrationPage from './Modules/Registration'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
 
   function showSystemNotification() {
     if ("Notification" in window) {
@@ -24,7 +30,7 @@ function App() {
             alert("This site uses notifications for the best user experience. Thank you for understanding");
           }
         });
-      } 
+      }
     }
   }
 
@@ -33,10 +39,13 @@ function App() {
   }, []);
 
   return (
-   <div>
-    <h1> ALERT 24 </h1>
-    <span> SMART DIGITAL ALERTING SOLUTION </span>
-   </div>
+      <Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegistrationPage />} />
+      </Routes>
+    </Router>
   )
 }
 
