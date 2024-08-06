@@ -6,6 +6,8 @@ import './App.css'
 import LoginPage from './Modules/LoginPage/LoginPage'
 import LoginForm from './Modules/LoginPage'
 import RegistrationPage from './Modules/Registration'
+import Home from './Modules/Home'
+import Connections from './Modules/Connections';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -39,11 +41,13 @@ function App() {
   }, []);
 
   return (
-      <Router>
+    <Router>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<RegistrationPage />} />
+        <Route path="/" exact element={<LoginPage />} />
+        <Route path="/login" exact element={<LoginForm />} />
+        <Route path="/register" exact element={<RegistrationPage />} />
+        <Route path='/home' exact element={<Home />} />
+        <Route path='/connections' exact element={<Connections /> } /> 
       </Routes>
     </Router>
   )
