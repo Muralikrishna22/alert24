@@ -33,7 +33,6 @@
 .form {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .input {
@@ -53,13 +52,14 @@
 }
 
 .button {
-  width: 80%;
+  min-width: 120px;
   padding: 10px;
   margin: 20px 0;
   background-color: #000;
   color: #fff;
   border: none;
   font-size: 16px;
+  align-self: auto;
 }
 
 
@@ -79,5 +79,5 @@
   background-color: white;
   color: black;
   border: 2px solid black;
-  
+
 }

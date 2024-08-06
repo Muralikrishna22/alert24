@@ -33,7 +33,6 @@
 .form {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .input {
@@ -46,6 +45,7 @@
     border-radius: 8px;
     outline: none;
     border: 2px solid black;
+    width: -webkit-fill-available;
 }
 
 .input:focus {
@@ -53,11 +53,12 @@
 }
 
 .button {
-    width: 80%;
+    min-width: 100px;
     padding: 10px;
     margin: 20px 0;
     background-color: #000;
     color: #fff;
     border: none;
     font-size: 16px;
+    align-self: center;
 }
