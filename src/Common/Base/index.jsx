@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import InstallationPrompt from "../InstallationPrompt";
+import './styles.css';
 
 const Base = ({ children }) => {
     return (
