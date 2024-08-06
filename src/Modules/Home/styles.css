@@ -40,6 +40,7 @@
     align-items: center;
     justify-content: space-around;
     border-radius: 10px;
+    padding: 5px;
 }
 
 .sub_menu .icon{

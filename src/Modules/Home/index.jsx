@@ -13,27 +13,6 @@ import Base from '../../Common/Base';
 
 
 const Home = () => {
-    function showSystemNotification() {
-        if ("Notification" in window) {
-            if (Notification.permission === "granted") {
-                let notification = new Notification("Need your attention", {
-                    body: "This site uses notifications for the best user experience. Thank you for understanding",
-                    icon: 'ALERT 24',
-                });
-            } else if (Notification.permission !== "denied") {
-                Notification.requestPermission().then((permission) => {
-                    if (permission === "granted") {
-                        let notification = new Notification("Need your attention", {
-                            body: "This site uses notifications for the best user experience. Thank you for understanding",
-                            icon: 'ALERT 24',
-                        });
-                    } else if (permission === "denied") {
-                        alert("This site uses notifications for the best user experience. Thank you for understanding");
-                    }
-                });
-            }
-        }
-    }
 
     return (
         <Base>
@@ -81,11 +60,10 @@ const Home = () => {
                             Manage connections
                         </div>
                     </a>
-                    <a className='category_item' onClick={showSystemNotification}>
+                    <a className='category_item' href='/alert-system'>
                         <BiSolidBellRing className="icon" />
                         <div>
                             Alerts
-
                         </div>
                     </a>
                     <a className='category_item'>
