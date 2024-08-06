@@ -46,7 +46,7 @@ const InstallationPrompt = () => {
   return (
     <>
       <div id="installPrompt" className="install-popup">
-        <p style={{ color: 'black' }}>Install this app for a better experience</p>
+        <p>Install this app for a better experience</p>
         <button onClick={handleInstall}>Click to install </button>
         {/* <button onClick={handleCancel}>Cancel</button> */}
       </div>

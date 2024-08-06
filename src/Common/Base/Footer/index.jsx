@@ -9,8 +9,8 @@ const Footer = () => {
   const navigate = useNavigate();
     return (
       <footer className="footer">
-        <button className="footerButton"><IoHomeOutline /></button>
-        <button onClick={() => navigate('/')} className="footerButton"><MdOutlineArrowBackIos /></button>
+        <button className="footerButton" onClick={() => navigate('/')}><IoHomeOutline /></button>
+        <button onClick={() => navigate(-1)} className="footerButton"><MdOutlineArrowBackIos /></button>
       </footer>
     );
   };

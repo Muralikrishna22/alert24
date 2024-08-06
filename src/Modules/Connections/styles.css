@@ -48,11 +48,13 @@
     margin: 0 20px;
     border: 1px solid black;
     border-radius: 10px;
-    padding: 10px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+    font-size: 16px;
+    text-transform: capitalize;
 }
 
 .connnections_list ul{
@@ -60,7 +62,7 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -72,7 +74,7 @@
     justify-content: space-between;
     align-items: center;
     border-radius: 5px;
-    padding: 10px;
+    padding: 15px;
     flex: 1;
 }
 

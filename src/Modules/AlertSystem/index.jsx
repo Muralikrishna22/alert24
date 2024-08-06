@@ -103,7 +103,7 @@ const AlertSystem = () => {
                 <ul className='alerts_list'>
                     {
                         alertCategories?.map((alert, ind) => (
-                            <div className='alert_container' onClick={showSystemNotification}>
+                            <div key={ind} className='alert_container' onClick={showSystemNotification}>
                                 {alert.icon}
                                 <div>
                                     {alert.name}

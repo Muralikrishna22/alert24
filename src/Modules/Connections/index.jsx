@@ -59,7 +59,7 @@ const Connections = () => {
                 <div className='connnections_list'>
                     <ul>
                         {members?.map((obj, ind) => (
-                            <li className='connection_card'>
+                            <li key={ind} className='connection_card'>
                                 <div> {obj.name}</div>
                                 <div> <RiDeleteBin6Line /> </div>
                             </li>

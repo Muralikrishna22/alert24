@@ -4,6 +4,7 @@
     text-transform: uppercase;
     background-color: white;
     color: black;
+    flex: 1;
 }
 
 .alert_system_container h3 {

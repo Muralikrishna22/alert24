@@ -2,7 +2,6 @@
     position: fixed;
     bottom: 20px;
     right: 37px;
-    background: white;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
@@ -20,4 +19,8 @@
     color: black;
     margin-top: 10px ;
   }
+
+.install-popup p{
+  color: white;
+}
   
