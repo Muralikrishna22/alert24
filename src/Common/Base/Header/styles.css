@@ -13,8 +13,12 @@
     font-weight: bold;
     padding: 0px;
     height: auto;
+    margin: 0px 10px;
 }
 
 .profileIcon {
+    display: flex;
     font-size: 24px;
+    margin: 0px 10px;
+    align-items: center;
 }

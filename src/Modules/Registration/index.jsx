@@ -1,9 +1,11 @@
 import React from 'react';
 import './styles.css';
 import Base from '../../Common/Base';
-import Input from '../../Common/Base/Input';
+import TextInput from '../../Common/Base/TextInput';
 import Button from '../../Common/Base/Button';
 import { useNavigate } from 'react-router-dom';
+import { FaUser } from "react-icons/fa6";
+
 
 // Registration Form Component
 const RegistrationForm = () => {
@@ -16,12 +18,12 @@ const RegistrationForm = () => {
   return (
     <div className='container'>
         <div className='formContainer'>
-      <div className='avatar'></div>
+      <FaUser className='avatar'/>
       <form className='form' onSubmit={handleSubmit}>
-        <Input placeholder="First Name" />
-        <Input placeholder="Last Name" />
-        <Input placeholder="Contact No" />
-        <Input placeholder="Email" />
+        <TextInput placeholder="First Name" />
+        <TextInput placeholder="Last Name" />
+        <TextInput placeholder="Contact No" />
+        <TextInput placeholder="Email" />
         <Button type="submit">Sign Up</Button>
       </form>
     </div>
