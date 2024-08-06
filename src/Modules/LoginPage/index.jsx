@@ -4,10 +4,12 @@ import Base from '../../Common/Base';
 import TextInput from '../../Common/Base/TextInput';
 import Button from '../../Common/Base/Button';
 import { FaUser } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom';
 
 // Registration Form Component
 const LoginForm = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
   return (
     <div className='container'>
       <div className='formContainer'>
@@ -21,7 +23,7 @@ const LoginForm = () => {
           {isLoggedIn && (
             <>
             <TextInput placeholder="Enter OTP... " />
-            <Button type="submit">Verify</Button>
+            <Button onClick={() => navigate('/home')} type="button">Verify</Button>
             </>
           )}
         </div>
