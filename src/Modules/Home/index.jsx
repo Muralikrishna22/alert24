@@ -47,7 +47,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className='categories_list'>
-                    <a className='category_item'>
+                    <a className='category_item' href='/create_address'>
                         <IoHomeSharp className="icon" />
                         <div>
                             Address Registration

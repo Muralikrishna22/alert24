@@ -9,6 +9,7 @@ import RegistrationPage from './Modules/Registration'
 import Home from './Modules/Home'
 import Connections from './Modules/Connections';
 import AlertSystem from './Modules/AlertSystem';
+import CreateAddress from './Modules/CreateAddress';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -50,6 +51,7 @@ function App() {
         <Route path='/home' exact element={<Home />} />
         <Route path='/connections' exact element={<Connections /> } /> 
         <Route path='/alert-system' exact element={<AlertSystem /> } />
+        <Route path='/create_address' exact element={<CreateAddress /> } />
        </Routes>
     </Router>
   )
