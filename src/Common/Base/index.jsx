@@ -7,7 +7,9 @@ const Base = ({ children }) => {
     return (
         <div className="base_container">
             <Header />
+            <div className="children">
             {children}
+            </div>
             <Footer />
         </div>
     )
