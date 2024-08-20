@@ -11,10 +11,12 @@
     "prod": "npm run build && serve -s dist -p 3001"
   },
   "dependencies": {
+    "firebase": "^8.3.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.0",
+    "react-firebase-hooks": "^5.1.1",
     "react-icons": "^5.2.1",
+    "react-router-dom": "^6.26.0",
     "vite-plugin-pwa": "^0.20.1"
   },
   "devDependencies": {
