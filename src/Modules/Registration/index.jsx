@@ -30,7 +30,7 @@ const RegistrationForm = () => {
           </form>)
           : (<>
             <TextInput placeholder="Enter OTP... " helpText="OTP has been sent to your email" />
-            <Button onClick={() => navigate('/home')} type="button">Verify</Button>
+            <Button onClick={() => navigate('/')} type="button">Verify</Button>
           </>)
         }
       </div>

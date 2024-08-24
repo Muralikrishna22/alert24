@@ -1,123 +1,126 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
 import Base from "../../Common/Base";
 import TextInput from "../../Common/Base/TextInput";
 import Button from "../../Common/Base/Button";
 import { FaUser } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { firebase, auth } from "../../firebase";
+import { auth } from "../../firebase";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 
 // Registration Form Component
 const LoginForm = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-  const [mynumber, setnumber] = useState("+916303582626");
+  const [mynumber, setnumber] = useState("");
   const [otp, setotp] = useState("");
-  const [show, setshow] = useState(false);
-  const [final, setfinal] = useState("");
+  const [verifyOTP, setVerifyOTP] = useState(false);
+  const [final, setfinal] = useState(null);
 
-  // Sent OTP
   const signin = () => {
+    if (!auth) {
+      console.error("Firebase auth not initialized");
+      return;
+    }
+
     if (mynumber === "" || mynumber.length < 10) return;
 
+    const recaptchaVerifier = new RecaptchaVerifier(
+      auth,
+      "recaptcha-container",
+      {
+        size: "invisible",
+        callback: () => {
+          console.log("recaptcha resolved..");
+        },
+      }
+    );
 
-    let verify = new firebase.auth.RecaptchaVerifier("recaptcha-container");
-    auth
-      .signInWithPhoneNumber(mynumber, verify)
-      .then((result) => {
-        setfinal(result);
-        alert("code sent");
-        setshow(true);
+    signInWithPhoneNumber(auth, `+91${mynumber}`, recaptchaVerifier)
+      .then((confirmationResult) => {
+        setfinal(confirmationResult);
+        console.log("OTP sent");
+        setVerifyOTP(true);
       })
-      .catch((err) => {
-        alert(err);
+      .catch((error) => {
+        console.log(error.message);
         window.location.reload();
       });
   };
 
-  // Validate OTP
   const ValidateOtp = () => {
-    if (otp === null || final === null) return;
+    if (otp === "" || final === null) return;
+
     final
       .confirm(otp)
       .then((result) => {
-        // success
+        console.log("User signed in successfully", result.user);
+        setIsLoggedIn(true);
+        navigate("/"); // Change route as needed
       })
-      .catch((err) => {
-        alert("Wrong code");
+      .catch((error) => {
+        console.log("Invalid OTP, please try again.");
       });
   };
 
-  return (
-    <div style={{ marginTop: "200px" }}>
-        <center>
-            <div
-                style={{
-                    display: !show ? "block" : "none",
-                }}
-            >
-                <input
-                    value={mynumber}
-                    onChange={(e) => {
-                        setnumber(e.target.value);
-                    }}
-                    placeholder="phone number"
-                />
-                <br />
-                <br />
-                <div id="recaptcha-container"></div>
-                <br />
-                <button onClick={signin}>
-                    Send OTP
-                </button>
-            </div>
-            <div
-                style={{
-                    display: show ? "block" : "none",
-                }}
-            >
-                <input
-                    type="text"
-                    placeholder={"Enter your OTP"}
-                    onChange={(e) => {
-                        setotp(e.target.value);
-                    }}
-                ></input>
-                <br />
-                <br />
-                <button onClick={ValidateOtp}>
-                    Verify
-                </button>
-            </div>
-        </center>
-    </div>
-);
+  // return (
+  //   <div style={{ marginTop: "200px" }}>
+  //     <center>
+  //       <div style={{ display: !show ? "block" : "none" }}>
+  //         <input
+  //           value={mynumber}
+  //           onChange={(e) => setnumber(e.target.value)}
+  //           placeholder="Phone Number"
+  //         />
+  //         <br /><br />
+  //         <div id="recaptcha-container"></div>
+  //         <br />
+  //         <button onClick={signin}>
+  //           Send OTP
+  //         </button>
+  //       </div>
+  //       <div style={{ display: show ? "block" : "none" }}>
+  //         <input
+  //           type="text"
+  //           placeholder={"Enter your OTP"}
+  //           onChange={(e) => setotp(e.target.value)}
+  //         />
+  //         <br /><br />
+  //         <button onClick={ValidateOtp}>
+  //           Verify
+  //         </button>
+  //       </div>
+  //     </center>
+  //   </div>
+  // );
 
   return (
     <div className="container">
       <div className="formContainer">
         <FaUser className="avatar" />
         <form className="form">
-          <TextInput placeholder="Contact No" onChange={(e) => {console.log(".....", e.target.value)}} />
-          <TextInput placeholder="Email (Optional)" />
-          <Button
-            isDisabled={isLoggedIn}
-            onClick={() => setIsLoggedIn((prev) => !prev)}
-            type="button"
-          >
-            Login
-          </Button>
-        </form>
-        <div>
-          {isLoggedIn && (
-            <>
-              <TextInput placeholder="Enter OTP... " />
-              <Button onClick={() => navigate("/home")} type="button">
+          <TextInput
+            placeholder="Contact No"
+            onChange={(e) => setnumber(e.target.value)}
+          />
+          <div id="recaptcha-container"></div>
+          {/* <TextInput placeholder="Email (Optional)" /> */}
+          {!verifyOTP ? (
+            <Button isDisabled={isLoggedIn} onClick={signin} type="button">
+              Login
+            </Button>
+          ) : (
+            <div>
+              <TextInput
+                placeholder="Enter OTP... "
+                onChange={(e) => setotp(e.target.value)}
+              />
+              <Button onClick={ValidateOtp} type="button">
                 Verify
               </Button>
-            </>
+            </div>
           )}
-        </div>
+        </form>
       </div>
     </div>
   );

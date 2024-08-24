@@ -6,7 +6,10 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 export default defineConfig({
   server: {
     // https: true,
-    port: 3001, 
+    port: 3001,
+  },
+  optimizeDeps: {
+    include: ["firebase/app", "firebase/auth"],
   },
   plugins: [
     react(),

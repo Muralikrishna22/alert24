@@ -45,11 +45,11 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" exact element={<LoginPage />} />
+        <Route path="/register" exact element={<LoginPage />} />
         <Route path="/login" exact element={<LoginForm />} />
-        <Route path="/register" exact element={<RegistrationPage />} />
-        <Route path='/home' exact element={<Home />} />
-        <Route path='/connections' exact element={<Connections /> } /> 
+        <Route path="/sign-up" exact element={<RegistrationPage />} />
+        <Route path='/' exact element={<Home />} />
+        <Route path='/connections' exact element={<Connections /> } />
         <Route path='/alert-system' exact element={<AlertSystem /> } />
         <Route path='/create_address' exact element={<CreateAddress /> } />
        </Routes>

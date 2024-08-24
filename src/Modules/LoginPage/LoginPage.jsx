@@ -15,7 +15,7 @@ const LoginPage = ({ setIsLoggedIn, setIsRegistered }) => {
                         <button onClick={() => navigate('/login')}>Login</button>
                     </div>
                     <div style={{ width: '50%' }}>
-                        <button onClick={() => navigate('../register')}>Register</button>
+                        <button onClick={() => navigate('/sign-up')}>Register</button>
                     </div>
                 </div>
             </div>
