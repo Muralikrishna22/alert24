@@ -26,6 +26,8 @@ const Header = () => {
       let loginRoutes = ["/login", "/register", "/sign-up"];
       if (!user && !loginRoutes.includes(location.pathname)) {
         navigate('/register')
+      }else if(user && loginRoutes.includes(location.pathname)){
+        navigate('/')
       }
     },1000);
     return () => {
