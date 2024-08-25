@@ -7,6 +7,7 @@ import { FaUser } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { healthCheck, verifyToken } from "../../ApiServices";
 
 // Registration Form Component
 const LoginForm = () => {
@@ -55,12 +56,18 @@ const LoginForm = () => {
       .confirm(otp)
       .then((result) => {
         console.log("User signed in successfully", result.user);
+        return result.user
+      })
+      .then((user) => {
+        verifyToken(user.accessToken)
         setIsLoggedIn(true);
         navigate("/"); // Change route as needed
       })
       .catch((error) => {
         console.log("Invalid OTP, please try again.");
       });
+
+      // healthCheck()
   };
 
   // return (

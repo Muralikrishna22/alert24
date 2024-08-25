@@ -12,18 +12,54 @@ import { TbAirConditioning } from "react-icons/tb";
 import './styles.css';
 import TextInput from "../../Common/Base/TextInput";
 import Button from "../../Common/Base/Button";
+import { addAddress } from "../../ApiServices";
+
+const saveAddress = (addressType) => {
+    console.log('address type', addressType)
+    const pincode = document.getElementById("pincode")?.value
+    // console.log('pincode', pincode.value)
+    const road = document.getElementById("road")?.value
+    const landmark = document.getElementById("landmark")?.value
+    const district = document.getElementById("district")?.value
+    const state = document.getElementById("state")?.value
+    
+    const buildingName = document.getElementById("buildingName")?.value
+    const roomNumber = document.getElementById("roomNumber")?.value
+
+    console.log('pincode', pincode)
+    const data = {
+        addressType,
+        landmark,
+        district, // required
+        state, // required
+        pincode: Number(pincode), //required 
+        latitude: 0,
+        longitude: 0, 
+        houseNumber: "33A",
+        roadNumber: road,
+        flatNumber: "A1",
+        floorNumber: "A",
+        roomNumber,
+        buildingName,
+    }
+    
+    addAddress(data)
+    .then((res) => res.json())
+    .then(res => console.log('address added successfully', res))
+    .catch(err => console.error('error adding address', err))
+}
 
 const Home_address = () => (
     <>
         <div className='address_form'>
             <div className='form_container'>
                 <div className='label'>Search Your Location</div>
-                <TextInput placeholder="H No./ Road No." />
-                <TextInput placeholder="Landmark" />
-                <TextInput placeholder="City/District" />
-                <TextInput placeholder="State" />
-                <TextInput placeholder="Pincode" />
-                <Button>Save</Button>
+                <TextInput placeholder="H No./ Road No." id="road" />
+                <TextInput placeholder="Landmark" id="landmark" />
+                <TextInput placeholder="City/District" id="district" />
+                <TextInput placeholder="State" id="state" />
+                <TextInput placeholder="Pincode" id="pincode" />
+                <Button onClick={() => saveAddress('home')}>Save</Button>
             </div>
         </div>
         <span className='heading'>Residential Details</span>
@@ -48,12 +84,12 @@ const Apartment_address = () => (
         <div className='address_form'>
             <div className='form_container'>
                 <div className='label'>Search Your Location</div>
-                <TextInput placeholder="Flat No./ Floor No./ Building Name" />
-                <TextInput placeholder="Landmark" />
-                <TextInput placeholder="City/District" />
-                <TextInput placeholder="State" />
-                <TextInput placeholder="Pincode" />
-                <Button>Save</Button>
+                <TextInput placeholder="Flat No./ Floor No./ Building Name" id="buildingName" />
+                <TextInput placeholder="Landmark" id="landmark" />
+                <TextInput placeholder="City/District" id="district" />
+                <TextInput placeholder="State" id="state" />
+                <TextInput placeholder="Pincode" id="pincode" />
+                <Button onClick={() => saveAddress('apartment')}>Save</Button>
             </div>
         </div>
         <span className='heading'>Residential Details</span>
@@ -78,12 +114,12 @@ const Hostel_address = () => (
         <div className='address_form'>
             <div className='form_container'>
                 <div className='label'>Search Your Location</div>
-                <TextInput placeholder="Room No./ Floor No./ Hostel Name" />
-                <TextInput placeholder="Landmark" />
-                <TextInput placeholder="City/District" />
-                <TextInput placeholder="State" />
-                <TextInput placeholder="Pincode" />
-                <Button>Save</Button>
+                <TextInput placeholder="Room No./ Floor No./ Hostel Name" id="roomNumber" />
+                <TextInput placeholder="Landmark" id="landmark" />
+                <TextInput placeholder="City/District" id="district" />
+                <TextInput placeholder="State" id="state" />
+                <TextInput placeholder="Pincode" id="pincode" />
+                <Button onClick={() => saveAddress('hostel')}>Save</Button>
             </div>
         </div>
         <span className='heading'>Residential Details</span>
@@ -108,12 +144,13 @@ const Outdoor_address = () => (
         <div className='address_form'>
             <div className='form_container'>
                 <div className='label'>Search Your Location</div>
-                <TextInput placeholder="Room No./ Floor No." />
-                <TextInput placeholder="Stay Building Name" />
-                <TextInput placeholder="City/District" />
-                <TextInput placeholder="State" />
-                <TextInput placeholder="Pincode" />
-                <Button>Save</Button>
+                <TextInput placeholder="Room No./ Floor No." id="roomNumber" />
+                <TextInput placeholder="Stay Building Name" id="buildingName" />
+                <TextInput placeholder="Landmark" id="landmark" />
+                <TextInput placeholder="City/District" id="district" />
+                <TextInput placeholder="State" id="state" />
+                <TextInput placeholder="Pincode" id="pincode" />
+                <Button onClick={() => saveAddress('outdoor')}>Save</Button>
             </div>
         </div>
         <span className='heading'>Residential Details</span>
