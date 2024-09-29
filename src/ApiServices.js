@@ -1,5 +1,4 @@
-const url = "http://64.227.188.129:8080"
-
+const url = "http://192.168.0.103:8080"
 
 
 export const healthCheck = () => {
@@ -147,3 +146,39 @@ export const listUsers = () => {
   .catch(err => console.error('err', err))
 
 }
+
+
+// notification
+export const getAlertMessage = (cb) => {
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json")
+  headers.append("Authorization", `Bearer ${window.localStorage.getItem('token')}`)
+
+  const requestOptions = {
+    method: "GET",
+    headers: headers,
+    redirect: "follow"
+  };
+
+  fetch(`${url}/notify/consume`, requestOptions)
+  .then((response) => response.json())
+  .then((data) => cb(data))
+  .catch(err => console.error('err', err))
+};
+
+export const sendAlertMessage = () => {
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json")
+  headers.append("Authorization", `Bearer ${window.localStorage.getItem('token')}`)
+
+  const requestOptions = {
+    method: "POST",
+    headers: headers,
+    redirect: "follow"
+  };
+
+  fetch(`${url}/notify/produce`, requestOptions)
+  .then((response) => response.json())
+  .then((data) => cb(data))
+  .catch(err => console.error('err', err))
+};

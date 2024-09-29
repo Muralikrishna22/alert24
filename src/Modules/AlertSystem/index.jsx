@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Base from '../../Common/Base'
 import './styles.css'
 import { FaCloudMoonRain } from "react-icons/fa";
@@ -13,11 +13,7 @@ import { GiGasStove } from "react-icons/gi";
 import { PiThermometerHot } from "react-icons/pi";
 import { FaRegHospital } from "react-icons/fa";
 import { MdOutlineSensorDoor } from "react-icons/md";
-
-
-
-
-
+import { getAlertMessage, sendAlertMessage } from '../../ApiServices';
 
 const AlertSystem = () => {
 
@@ -95,15 +91,29 @@ const AlertSystem = () => {
         }
     }
 
+    useEffect(() => {
+        let notificationInteval = setInterval(() => {
+            getAlertMessage((res) => {
+                if(res?.data?.notify){
+                    showSystemNotification()
+                }
+            })
+        }, 5000)
+
+        return () => {
+            clearInterval(notificationInteval)
+        }
+    })
+
     return (
         <Base>
             <div className='alert_system_container'>
                 <h3>Alerting system</h3>
-                
+
                 <ul className='alerts_list'>
                     {
                         alertCategories?.map((alert, ind) => (
-                            <div key={ind} className='alert_container' onClick={showSystemNotification}>
+                            <div key={ind} className='alert_container' onClick={() => sendAlertMessage()}>
                                 {alert.icon}
                                 <div>
                                     {alert.name}
