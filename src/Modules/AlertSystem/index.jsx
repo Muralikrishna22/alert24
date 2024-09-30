@@ -20,82 +20,100 @@ const AlertSystem = () => {
     const alertCategories = [
         {
             name: 'Rains',
-            icon: <FaCloudMoonRain />
+            icon: <FaCloudMoonRain />,
+            title: 'Rain Alert',
+            description: 'Heavy rainfall is expected in your area. Please take necessary precautions.'
         },
         {
             name: 'Winds',
-            icon: <RiWindyLine />
+            icon: <RiWindyLine />,
+            title: 'Wind Alert',
+            description: 'Strong winds are forecasted. Secure outdoor items and avoid unnecessary travel.'
         },
         {
             name: 'Slides',
-            icon: <GiMountainCave />
+            icon: <GiMountainCave />,
+            title: 'Landslide Alert',
+            description: 'Possible landslides in hilly areas. Stay cautious and avoid high-risk zones.'
         },
         {
             name: 'Roads',
-            icon: <FaRoadCircleExclamation />
+            icon: <FaRoadCircleExclamation />,
+            title: 'Road Alert',
+            description: 'Roads may be blocked or damaged. Follow traffic updates and reroute if needed.'
         },
         {
             name: 'Fire',
-            icon: <ImFire />
+            icon: <ImFire />,
+            title: 'Fire Alert',
+            description: 'Fire hazards in the area. Stay informed and follow emergency services’ advice.'
         },
         {
             name: 'Electricity',
-            icon: <MdElectricBolt />
+            icon: <MdElectricBolt />,
+            title: 'Electricity Alert',
+            description: 'Power outages expected due to adverse weather. Prepare for potential blackouts.'
         },
         {
-            name: 'Earth Quake',
-            icon: <GiEarthSpit />
+            name: 'Earthquake',
+            icon: <GiEarthSpit />,
+            title: 'Earthquake Alert',
+            description: 'Earthquake detected in your region. Follow safety procedures immediately.'
         },
         {
-            name: 'River Over flow',
-            icon: <FaWater />
+            name: 'River Overflow',
+            icon: <FaWater />,
+            title: 'Flood Alert',
+            description: 'River overflow may cause flooding. Evacuate low-lying areas and stay safe.'
         },
         {
-            name: 'Gas leaks',
-            icon: <GiGasStove />
+            name: 'Gas Leaks',
+            icon: <GiGasStove />,
+            title: 'Gas Leak Alert',
+            description: 'Gas leaks reported nearby. Evacuate immediately and avoid open flames.'
         },
         {
-            name: 'Heat wave ',
-            icon: <PiThermometerHot />
+            name: 'Heatwave',
+            icon: <PiThermometerHot />,
+            title: 'Heatwave Alert',
+            description: 'Extreme temperatures expected. Stay hydrated and avoid outdoor activities.'
         },
         {
-            name: 'Accedents',
-            icon: <FaRegHospital />
+            name: 'Accidents',
+            icon: <FaRegHospital />,
+            title: 'Accident Alert',
+            description: 'Accidents reported on major roads. Drive cautiously and avoid affected areas.'
         },
         {
-            name: 'Out door',
-            icon: <MdOutlineSensorDoor />
+            name: 'Outdoor',
+            icon: <MdOutlineSensorDoor />,
+            title: 'Outdoor Alert',
+            description: 'Adverse weather conditions for outdoor activities. Postpone non-essential plans.'
         },
     ];
 
-    const getAlertMessage = () => {
-        setTimeout(async ()=> {
-            try{
-                const response = await axios.get('/notify/consume');
-                
-            } catch(error) {
-                console.log('....error', error);
-            }
-        },[10000]);
-    };
-
-    const sendAlertMessage = async () => {
-        await axios.post('/notify/provide', { alertCategory: 'Heavy Rain' });
-    };
 
 
-    function showSystemNotification() {
+    function showSystemNotification(data) {
         if ("Notification" in window) {
             if (Notification.permission === "granted") {
-                let notification = new Notification("Need your attention", {
-                    body: "This site uses notifications for the best user experience. Thank you for understanding",
-                    icon: 'ALERT 24',
-                });
+                let notification;
+                if(data){
+                    notification = new Notification(data.title, {
+                        body: data.description,
+                        icon: 'ALERT 24',
+                    });
+                }else{
+                    notification = new Notification("Need your attention", {
+                        body: "This site uses notifications for the best user experience. Thank you for understanding",
+                        icon: 'ALERT 24',
+                    });
+                }
             } else if (Notification.permission !== "denied") {
                 Notification.requestPermission().then((permission) => {
                     if (permission === "granted") {
-                        let notification = new Notification("Need your attention", {
-                            body: "This site uses notifications for the best user experience. Thank you for understanding",
+                        let notification = new Notification(data.title, {
+                            body: data.description,
                             icon: 'ALERT 24',
                         });
                     } else if (permission === "denied") {
@@ -110,7 +128,7 @@ const AlertSystem = () => {
         let notificationInteval = setInterval(() => {
             getAlertMessage((res) => {
                 if(res?.data?.notify){
-                    showSystemNotification()
+                    showSystemNotification(res?.data?.data)
                 }
             })
         }, 5000)
@@ -128,7 +146,7 @@ const AlertSystem = () => {
                 <ul className='alerts_list'>
                     {
                         alertCategories?.map((alert, ind) => (
-                            <div key={ind} className='alert_container' onClick={() => sendAlertMessage()}>
+                            <div key={ind} className='alert_container' onClick={() => sendAlertMessage({title: alert.title, description:alert.description })}>
                                 {alert.icon}
                                 <div>
                                     {alert.name}

@@ -1,4 +1,4 @@
-const url = "http://192.168.0.103:8080"
+const url = import.meta.env.VITE_APP_API_SERVICE
 
 
 export const healthCheck = () => {
@@ -45,7 +45,6 @@ export const addAddress = (data) => {
   return fetch(`${url}/address/`, requestOptions)
   .then((response) => response.json())
   .catch(err => console.error('err', err))
-
 }
 
 export const addUser = (data) => {
@@ -166,19 +165,20 @@ export const getAlertMessage = (cb) => {
   .catch(err => console.error('err', err))
 };
 
-export const sendAlertMessage = () => {
+export const sendAlertMessage = (data) => {
   const headers = new Headers();
   headers.append("Content-Type", "application/json")
   headers.append("Authorization", `Bearer ${window.localStorage.getItem('token')}`)
+  const raw = JSON.stringify({...data})
 
   const requestOptions = {
     method: "POST",
     headers: headers,
+    body: raw,
     redirect: "follow"
   };
 
   fetch(`${url}/notify/produce`, requestOptions)
   .then((response) => response.json())
-  .then((data) => cb(data))
   .catch(err => console.error('err', err))
 };
