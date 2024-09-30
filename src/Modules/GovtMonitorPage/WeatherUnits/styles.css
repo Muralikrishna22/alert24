@@ -1,0 +1,44 @@
+.unit_button {
+    border: 1px 1px solid black;
+    border-radius: 4px;
+    background-color: black;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 200px;
+    gap: 30px;
+    cursor: pointer;
+    align-items: center;
+}
+
+.unit_button_label {
+    color: white;
+    font-size: 12px;
+    word-break: word-phrase;
+    align-content: center;
+}
+
+.unit_button svg{
+    font-size: 40px;
+}
+
+.unit_perc {
+    border-radius: 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: white;
+}
+
+.perc {
+    color: black;
+    font-size: 12px;
+}
+
+.buttonLabel {
+    background-color: black;
+    margin-left: 5px;
+    margin-right: 5px;
+}

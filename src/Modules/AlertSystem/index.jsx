@@ -66,7 +66,22 @@ const AlertSystem = () => {
             name: 'Out door',
             icon: <MdOutlineSensorDoor />
         },
-    ]
+    ];
+
+    const getAlertMessage = () => {
+        setTimeout(async ()=> {
+            try{
+                const response = await axios.get('/notify/consume');
+                
+            } catch(error) {
+                console.log('....error', error);
+            }
+        },[10000]);
+    };
+
+    const sendAlertMessage = async () => {
+        await axios.post('/notify/provide', { alertCategory: 'Heavy Rain' });
+    };
 
 
     function showSystemNotification() {

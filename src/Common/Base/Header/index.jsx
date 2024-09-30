@@ -29,7 +29,7 @@ const Header = () => {
       }else if(user && loginRoutes.includes(location.pathname)){
         navigate('/')
       }
-    },2000);
+    },5000);
     return () => {
       clearTimeout(checkUserTimeout)
     }
