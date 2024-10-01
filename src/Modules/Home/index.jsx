@@ -63,13 +63,25 @@ const Home = () => {
                     <a className='category_item' href='/alert-system'>
                         <BiSolidBellRing className="icon" />
                         <div>
-                            Alerts
+                            Users Alerts
                         </div>
                     </a>
                     <a className='category_item'>
                         <FaHandsHelping className="icon" />
                         <div>
                             Help/Complants
+                        </div>
+                    </a>
+                    <a className='category_item' href='/govt/alert-system'>
+                        <BiSolidBellRing className="icon" />
+                        <div>
+                            Govt Alerts
+                        </div>
+                    </a>
+                    <a className='category_item' href='/govt_monitor'>
+                        <FaHandsHelping className="icon" />
+                        <div>
+                            Dashboard
                         </div>
                     </a>
                 </div>

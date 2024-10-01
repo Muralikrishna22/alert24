@@ -10,7 +10,8 @@ import Home from './Modules/Home'
 import Connections from './Modules/Connections';
 import AlertSystem from './Modules/AlertSystem';
 import CreateAddress from './Modules/CreateAddress';
-import HomePage from './Modules/GovtMonitorPage/HomePage';
+import DashboardPage from './Modules/GovtMonitorPage/DashboardPage';
+import GovtAlertSystem from './Modules/GovtAlertSystem';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -53,7 +54,8 @@ function App() {
         <Route path='/connections' exact element={<Connections /> } />
         <Route path='/alert-system' exact element={<AlertSystem /> } />
         <Route path='/create_address' exact element={<CreateAddress /> } />
-        <Route path='/govt_monitor' exact element={<HomePage /> } />
+        <Route path='/govt_monitor' exact element={<DashboardPage /> } />
+        <Route path='/govt/alert-system' exact element={<GovtAlertSystem /> } />
        </Routes>
     </Router>
   )

@@ -70,3 +70,42 @@
     flex-direction: row;
     justify-content: center;
 }
+
+.dashboard {
+    color: #000000;
+}
+
+.table {
+    width: 90%;
+}
+.table-head {
+ /* width: 75px; */
+}
+
+.table-head-row {
+/* width: 75px; */
+}
+
+.table-head-row-data {
+    background-color: #000000;
+/* width: 75px; */
+color: #ffffff;
+font-size: 16px;
+}
+.table-body-row {
+/* width: 75px; */
+}
+.table-body-row-data {
+    border: 1px solid black;
+  border-collapse: collapse;
+  font-size: 16px;
+/* width: 75px; */
+}
+
+.table-body-row-data.share {
+/* width: 75px; */
+display: flex;
+justify-content: center;
+align-items: center;
+color: #ffffff;
+}

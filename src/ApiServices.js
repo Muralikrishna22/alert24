@@ -1,4 +1,5 @@
-const url = import.meta.env.VITE_APP_API_SERVICE
+const url = "https://fast-india-alerts.onrender.com"
+// const url = "http://localhost:8080"
 
 
 export const healthCheck = () => {
@@ -180,5 +181,61 @@ export const sendAlertMessage = (data) => {
 
   fetch(`${url}/notify/produce`, requestOptions)
   .then((response) => response.json())
+  .catch(err => console.error('err', err))
+};
+
+
+// Govt notification
+export const getGovtAlertMessage = (cb) => {
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json")
+  headers.append("Authorization", `Bearer ${window.localStorage.getItem('token')}`)
+
+  const requestOptions = {
+    method: "GET",
+    headers: headers,
+    redirect: "follow"
+  };
+
+  fetch(`${url}/notify/govt/consume`, requestOptions)
+  .then((response) => response.json())
+  .then((data) => cb(data))
+  .catch(err => console.error('err', err))
+};
+
+export const sendGovtAlertMessage = (data) => {
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json")
+  headers.append("Authorization", `Bearer ${window.localStorage.getItem('token')}`)
+  const raw = JSON.stringify({...data})
+
+  const requestOptions = {
+    method: "POST",
+    headers: headers,
+    body: raw,
+    redirect: "follow"
+  };
+
+  fetch(`${url}/notify/govt/produce`, requestOptions)
+  .then((response) => response.json())
+  .catch(err => console.error('err', err))
+};
+
+
+// Govt dashboard
+export const getDashboard = (cb) => {
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json")
+  headers.append("Authorization", `Bearer ${window.localStorage.getItem('token')}`)
+
+  const requestOptions = {
+    method: "GET",
+    headers: headers,
+    redirect: "follow"
+  };
+
+  fetch(`${url}/dashboard/info`, requestOptions)
+  .then((response) => response.json())
+  .then((data) => cb(data))
   .catch(err => console.error('err', err))
 };
