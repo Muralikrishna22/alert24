@@ -13,7 +13,7 @@ import { GiGasStove } from "react-icons/gi";
 import { PiThermometerHot } from "react-icons/pi";
 import { FaRegHospital } from "react-icons/fa";
 import { MdOutlineSensorDoor } from "react-icons/md";
-import { getAlertMessage, sendAlertMessage } from '../../ApiServices';
+import { sendAlertMessage } from '../../ApiServices';
 
 const GovtAlertSystem = () => {
 
@@ -91,52 +91,6 @@ const GovtAlertSystem = () => {
             description: 'Adverse weather conditions for outdoor activities. Postpone non-essential plans.'
         },
     ];
-
-
-
-    function showSystemNotification(data) {
-        if ("Notification" in window) {
-            if (Notification.permission === "granted") {
-                let notification;
-                if(data){
-                    notification = new Notification(data.title, {
-                        body: data.description,
-                        icon: 'ALERT 24',
-                    });
-                }else{
-                    notification = new Notification("Need your attention", {
-                        body: "This site uses notifications for the best user experience. Thank you for understanding",
-                        icon: 'ALERT 24',
-                    });
-                }
-            } else if (Notification.permission !== "denied") {
-                Notification.requestPermission().then((permission) => {
-                    if (permission === "granted") {
-                        let notification = new Notification(data.title, {
-                            body: data.description,
-                            icon: 'ALERT 24',
-                        });
-                    } else if (permission === "denied") {
-                        alert("This site uses notifications for the best user experience. Thank you for understanding");
-                    }
-                });
-            }
-        }
-    }
-
-    useEffect(() => {
-        let notificationInteval = setInterval(() => {
-            getAlertMessage((res) => {
-                if(res?.data?.notify){
-                    showSystemNotification(res?.data?.data)
-                }
-            })
-        }, 5000)
-
-        return () => {
-            clearInterval(notificationInteval)
-        }
-    })
 
     return (
         <Base>

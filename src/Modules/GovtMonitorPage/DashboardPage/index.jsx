@@ -90,7 +90,7 @@ const Dashboard = () => {
             <td className='table-body-row-data'>{entry.city}</td>
             <td className='table-body-row-data share'><ShareButton shareData={{title: `${entry.remarks}`, description: `${entry.remarks}`}}>Share</ShareButton></td>
             <td className='table-body-row-data'>{entry.status}</td>
-            <td className='table-body-row-data'>{`${entry.remarks} alert`}</td>
+            <td className='table-body-row-data'>{`${entry.remarks}`}</td>
           </tr>
         ))}
       </tbody>

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
+  const audio = new Audio('/src/assets/alert.mp3'); // Replace with the correct path to your audio file
 
   const handleSignout = () => {
     signOut(auth)
@@ -19,6 +20,16 @@ const Header = () => {
       .catch((error) => {
         console.log("An error happened on Sign-out.");
       });
+  };
+
+  const setupAudio = () => {
+    audio
+      .play()
+      .then(() => {
+        audio.pause(); // Pause immediately after preparing
+        console.log("Audio prepared for playback");
+      })
+      .catch((err) => console.error("Error preparing audio:", err));
   };
 
   useEffect(() => {
@@ -40,6 +51,7 @@ const Header = () => {
       <div className="logo">ALERT24</div>
       <div className="profileIcon">
         <FaUserCircle />{" "}
+        {user && <button onClick={setupAudio}>Enable Notifications</button>}
         {user && <button onClick={handleSignout}>Sign out</button>}
       </div>
     </header>

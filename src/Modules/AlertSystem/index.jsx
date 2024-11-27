@@ -95,6 +95,7 @@ const AlertSystem = () => {
 
 
     function showSystemNotification(data) {
+        const audio = new Audio('/src/assets/alert.mp3'); // Replace with the correct path to your audio file
         if ("Notification" in window) {
             if (Notification.permission === "granted") {
                 let notification;
@@ -109,6 +110,8 @@ const AlertSystem = () => {
                         icon: 'ALERT 24',
                     });
                 }
+            // Play the audio
+            audio.play().catch((err) => console.error("\n\n\nError playing audio:", err));
             } else if (Notification.permission !== "denied") {
                 Notification.requestPermission().then((permission) => {
                     if (permission === "granted") {
@@ -116,6 +119,8 @@ const AlertSystem = () => {
                             body: data.description,
                             icon: 'ALERT 24',
                         });
+                    // Play the audio
+                    audio.play().catch((err) => console.error("\n\n\nError playing audio:", err));
                     } else if (permission === "denied") {
                         alert("This site uses notifications for the best user experience. Thank you for understanding");
                     }
